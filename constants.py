@@ -16,4 +16,4 @@
 
 """Cloud Pub/Sub sample application constants."""
 
-SUBSCRIPTION_UNIQUE_TOKEN = '{AN-UNIQUE-TOKEN}'
+SUBSCRIPTION_UNIQUE_TOKEN = 'eebeenieG2iegor7'

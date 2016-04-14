@@ -30,7 +30,7 @@ from oauth2client.client import GoogleCredentials
 import constants
 
 
-APPLICATION_NAME = "google-cloud-pubsub-appengine-sample/1.0"
+APPLICATION_NAME = "gcp-next2016-pubsub-demo/1.0"
 
 PUBSUB_SCOPES = ["https://www.googleapis.com/auth/pubsub"]
 
@@ -73,7 +73,7 @@ def get_full_subscription_name():
 
 
 def get_app_topic_name():
-    return 'topic-pubsub-api-appengine-sample-python'
+    return 'topic-gcp-next2016-pubsub-demo'
 
 
 def get_app_subscription_name():

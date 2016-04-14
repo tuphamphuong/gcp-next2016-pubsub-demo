@@ -1,12 +1,11 @@
-# cloud-pubsub-samples-python
+# gcp-next2016-pubsub-demo
 
-## appengine-push
+## ỉmpove from cloud-pubsub-samples-python : appengine-push
 
 Note: The push endpoints don't work with the App Engine's local
 devserver. The push notifications will go to an HTTP URL on the App
 Engine server even when you run this sample locally. So we recommend
 you deploy and run the app on App Engine.
-TODO(tmatsuo): Better implementation for devserver.
 
 ## Register your application
 
