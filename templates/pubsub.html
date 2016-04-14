@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org" ng-app="pubsub">
+<head>
+    <title>Hello Cloud Pub/Sub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700,300&amp;subset=latin,vietnamese">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body ng-controller="pubsub.PubsubController as PubsubController">
+<div class="header_container">
+     <img class="brand_text" src="/css/brand-text.png">
+</div>
+<div class="container_center">
+    <h1 class="container_center_header">Hello Cloud Pub/Sub!</h1>
+    <div class="div_tab">
+        <div class="tab messages" ng-click="PubsubController.onClickTabs('messages')"><button>Messages</button></div>
+        <div class="tab allUsers" ng-click="PubsubController.onClickTabs('allUsers')">
+        <button>All Users ({{PubsubController.count_users}})</button>
+        </div>
+    </div>
+    <div class="div_username">
+    <input class="username" ng-model="PubsubController.username" value="{{PubsubController.username}}" name="username" placeholder="Add your name here..."/>
+    <button class="btn_add_name" ng-show="PubsubController.define_add" ng-click="PubsubController.userCreate(PubsubController.username)">Add name</button>
+    </div>
+    <ul class="ul_intro">
+        <li>
+            <b>Project:</b> (( project ))
+        </li>
+        <li>
+            <b>Publishing to Topic:</b> (( topic )) 
+        </li>
+        <li>
+            <b>Listening on Subscription:</b> (( subscription ))
+        </li>
+        <li>
+            <b>Endpoint URL:</b> <input class="subscriptionEndpoint" value="(( subscriptionEndpoint ))"/>
+        </li>
+    </ul>
+    <div class="container_messages" ng-show="PubsubController.show_messages">
+        <div class="message_form">
+            <form>
+                <textarea
+                    class="msg_content"
+                    placeholder="Write something..."
+                    ng-model="PubsubController.message" name="message" rows="5" cols="100"></textarea>
+            </form>
+            <button class="btn btn_message" ng-click="PubsubController.sendMessage(PubsubController.message)">Send message</button>
+            <button class="btn btn_isAutoUpdating" ng-click="PubsubController.toggleAutoUpdate()" ng-show="PubsubController.isAutoUpdating">
+                Stop auto update
+            </button>
+            <button class="btn" ng-click="PubsubController.toggleAutoUpdate()" ng-hide="PubsubController.isAutoUpdating">
+                Start auto update
+            </button>
+            per <input type="text" size="3" ng-model="PubsubController.interval"> seconds.
+        </div>
+        <div class="messages_content">
+            <h2>Messages:</h2>
+            <ul class="ul_messages_content">
+                <li ng-repeat="m in PubsubController.messages track by $index" ng-if="m !== undefined">
+                    <div class="item_messages_header">
+                        User: #
+                        <font>{{ m.username }}</font>
+                        <span>{{ m.created }}</span>
+                    </div>
+                    {{ m.message_data }}
+                    {{ json_expression | json : spacing }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container_all_users" ng-show="PubsubController.show_all_users">
+        <h2>All users:</h2>
+        <ul class="ul_all_users">
+            <li ng-repeat="user in PubsubController.all_users track by $index">
+                User: <font class="username_text">{{ user.name }}</font>
+            </li>
+        </ul>
+    </div>
+    <hr/>
+    <b class="label_errorNotice">Error Notice</b>
+    <span class="errorNotice" ng-show="PubsubController.errorNotice"><b>{{ PubsubController.errorNotice }}</b></span>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="/js/jquery.ui.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".ul_messages_content").slimScroll({
+                'position': 'right',
+                'height': '250px',
+                'railVisible': true,
+                'alwaysVisible': true
+            });
+        })
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="/js/jquery.slimscroll.js"></script>
+    <script src="/js/pubsub.js"></script>
+    <!--
+     Check user existing via cookie
+     If new user -> create
+     If existing, receive user info
+     Max image size 1 MB
+    -->
+</div>
+</body>
+</html>

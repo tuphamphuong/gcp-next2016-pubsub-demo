@@ -1,0 +1,25 @@
+application: quantum-tracker-127306
+version: gcp-next2016-demo
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /js
+  static_dir: js
+- url: /css
+  static_dir: css
+- url: /receive_message.*
+  script: main.APPLICATION
+- url: /.*
+  script: main.APPLICATION
+
+libraries:
+- name: jinja2
+  version: latest
+- name: webapp2
+  version: latest
+- name: pycrypto
+  version: latest
+- name: ssl
+  version: latest
